@@ -23,6 +23,9 @@ namespace EventsAndCallbacks
         }
 
         delegate int IntOperation(int a, int b);
+        delegate int GetValue();
+
+        static GetValue getLocalInt;
 
         static int Add(int a, int b)
         {
@@ -34,6 +37,15 @@ namespace EventsAndCallbacks
         {
             Console.WriteLine("Subtract called");
             return a - b;
+        }
+
+        static void SetLocalInt()
+        {
+            // Local variable set to 99
+            int localInt = 45;
+
+            // Set the delegate getLocalInt to a lambda expression that returns the value of localInt
+            getLocalInt = () => localInt;
         }
 
         static void Figure1_65()
@@ -82,12 +94,30 @@ namespace EventsAndCallbacks
             op = Subtract;
             Console.WriteLine(op(2, 2));
 
+            // Lambda Equivalent of Add
+            IntOperation add = (a, b) =>
+            {
+                Console.WriteLine("Lambda Add Called");
+                return a + b;
+            };
+            Console.WriteLine(add(1, 2));
+            
+
         }
+
+
+        static void Closures()
+        {
+            SetLocalInt();
+            Console.WriteLine("Value of localInt {0}", getLocalInt());
+        }
+
         static void Main(string[] args)
         {
             //Figure1_65();
             //Figure1_66();
-            CreateDelegates();
+            //CreateDelegates();
+            Closures();
 
             Console.ReadKey();
         }
