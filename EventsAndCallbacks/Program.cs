@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 
 namespace EventsAndCallbacks
@@ -21,6 +22,20 @@ namespace EventsAndCallbacks
             throw new Exception("BOOM!!!");
         }
 
+        delegate int IntOperation(int a, int b);
+
+        static int Add(int a, int b)
+        {
+            Console.WriteLine("Add called");
+            return a + b;
+        }
+
+        static int Subtract(int a, int b)
+        {
+            Console.WriteLine("Subtract called");
+            return a - b;
+        }
+
         static void Figure1_65()
         {
             // Create a new alarm
@@ -32,8 +47,6 @@ namespace EventsAndCallbacks
 
             alarm.RaiseAlarm("Figure1_65");
             Console.WriteLine("Alarm raised");
-
-            Console.ReadKey();
         }
 
         static void Figure1_66()
@@ -57,13 +70,26 @@ namespace EventsAndCallbacks
                 }
             }
 
-            Console.ReadKey();
         }
 
+        static void CreateDelegates()
+        {
+            // Explicitly create the delegate
+            IntOperation op = new IntOperation(Add);
+            Console.WriteLine(op(2, 2));
+
+            // Delegate is create automatically from method
+            op = Subtract;
+            Console.WriteLine(op(2, 2));
+
+        }
         static void Main(string[] args)
         {
             //Figure1_65();
-            Figure1_66();
+            //Figure1_66();
+            CreateDelegates();
+
+            Console.ReadKey();
         }
     }
 
