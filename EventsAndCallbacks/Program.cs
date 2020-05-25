@@ -25,7 +25,15 @@ namespace EventsAndCallbacks
         delegate int IntOperation(int a, int b);
         delegate int GetValue();
 
+
         static GetValue getLocalInt;
+
+        // use when needs to accept value and return result
+        Func<int, int, int> add = (a, b) => a + b;
+        // use when lambda expression doesn't return a result
+        static Action<string> logMessage = (message) => Console.WriteLine(message);
+        // take a value of particular type and return true / false
+        Predicate<int> dividesByThree = (i) => i % 3 == 0;
 
         static int Add(int a, int b)
         {
