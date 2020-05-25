@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EventsAndCallbacks
 {
@@ -113,11 +115,26 @@ namespace EventsAndCallbacks
 
         }
 
-
         static void Closures()
         {
             SetLocalInt();
             Console.WriteLine("Value of localInt {0}", getLocalInt());
+        }
+
+        static void LambdaExpressionTask()
+        {
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine(i + 1);
+                    Thread.Sleep(500);
+                }
+
+            });
+
+            Console.WriteLine("Task running...");
+
         }
 
         static void Main(string[] args)
@@ -125,7 +142,8 @@ namespace EventsAndCallbacks
             //Figure1_65();
             //Figure1_66();
             //CreateDelegates();
-            Closures();
+            //Closures();
+            LambdaExpressionTask();
 
             Console.ReadKey();
         }
